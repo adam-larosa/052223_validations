@@ -1,8 +1,8 @@
-"""user model
+"""user model with constraint
 
-Revision ID: 9e058e3e1836
+Revision ID: d47e467fac22
 Revises: 
-Create Date: 2023-07-28 07:59:51.975563
+Create Date: 2023-07-28 09:32:44.174652
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9e058e3e1836'
+revision = 'd47e467fac22'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,6 +24,7 @@ def upgrade():
     sa.Column('age', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.CheckConstraint('age >= 18'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

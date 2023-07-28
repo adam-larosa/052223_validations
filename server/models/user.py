@@ -13,3 +13,15 @@ class User( db.Model, SerializerMixin ):
     created_at = db.Column( db.DateTime, server_default = db.func.now() )
     updated_at = db.Column( db.DateTime, onupdate = db.func.now() )
 
+    __table_args__ = (
+        db.CheckConstraint( 'age >= 18' ),
+    )
+
+    # VALIDATION THAT HAPPENS WHEN WE TRY TO CREATE AN INSTANCE
+    # @validates( 'age' )
+    # def check_age( self, key, age_given ):
+    #     if age_given < 18:
+    #         raise ValueError( 'Adults only please!' )
+    #     return age_given
+
+    
